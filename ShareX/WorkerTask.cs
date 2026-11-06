@@ -392,7 +392,7 @@ namespace ShareX
 
                 bool cancelUpload = false;
 
-                if (Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.ShowBeforeUploadWindow))
+                if ((ApplicationState.Settings.AlwaysShowBeforeUploadWindow && Info.DataType != EDataType.URL) || Info.TaskSettings.AfterCaptureJob.HasFlag(AfterCaptureTasks.ShowBeforeUploadWindow))
                 {
                     cancelUpload = !BeforeUploadWindowIntegration.Show(Info);
                 }

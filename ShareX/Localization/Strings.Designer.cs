@@ -5649,5 +5649,6 @@ namespace ShareX.Localization {
         public static string MainMenuBuilder_VideoPlayer => ResourceManager.GetString("MainMenuBuilder_VideoPlayer", resourceCulture);
         public static string MainMenuBuilder_Stats => ResourceManager.GetString("MainMenuBuilder_Stats", resourceCulture);
         public static string MainMenuBuilder_NewBadge => ResourceManager.GetString("MainMenuBuilder_NewBadge", resourceCulture);
+        public static string ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow => ResourceManager.GetString("ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow", resourceCulture);
     }
 }

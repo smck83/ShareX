@@ -229,6 +229,9 @@ namespace ShareX
         [Category("Upload"), DefaultValue(100), Description("Large file size defined in MB. ShareX will warn before uploading large files. 0 disables this feature.")]
         public int ShowLargeFileSizeWarning { get; set; }
 
+        [Category("Upload"), DefaultValue(true), Description("Show the \"Before upload\" window for every upload, including uploads started from Windows Explorer or the command line.")]
+        public bool AlwaysShowBeforeUploadWindow { get; set; }
+
         [Category("Paths"), DefaultValue(false), Description("When enabled ShareX stores Uploaders configuration files per machine, e.g. UploadersConfig-MYPC.json.")]
         public bool UseMachineSpecificUploadersConfig { get; set; }
 

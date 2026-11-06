@@ -470,6 +470,7 @@
                                         <TextBlock Text="{x:Static res:Strings.ApplicationSettingsWindow_NumberOfTimesToRetryIfUploadFailsLabel}" VerticalAlignment="Center" FontWeight="Normal"/>
                                         <NumericUpDown Grid.Column="1" Classes="form-control" Minimum="0" Maximum="5" Value="{Binding MaxUploadFailRetry, Mode=TwoWay}"/>
                                     </Grid>
+                                    <CheckBox Classes="setting" Content="{x:Static res:Strings.ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow}" IsChecked="{Binding AlwaysShowBeforeUploadWindow, Mode=TwoWay}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>

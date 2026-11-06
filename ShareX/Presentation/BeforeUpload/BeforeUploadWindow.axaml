@@ -180,7 +180,6 @@
                 <Button Grid.Column="2"
                         Classes="compact primary"
                         Content="{x:Static res:Strings.BeforeUploadWindow_Upload}"
-                        IsDefault="True"
                         Click="OnUploadClick"/>
             </Grid>
         </Grid>

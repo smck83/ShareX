@@ -49,6 +49,15 @@ namespace ShareX
         Dev
     }
 
+    // Labels come from ApplicationSettingsWindow_UploadConsent* in Strings.resx,
+    // via ApplicationSettingsViewModel.UploadConsentModeOptions.
+    public enum UploadConsentMode
+    {
+        AskEveryTime,
+        AlwaysAllow,
+        NeverAllow
+    }
+
     public enum SupportedLanguage
     {
         Automatic, // Localized

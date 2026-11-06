@@ -456,6 +456,16 @@
                             <Border Classes="section-card" controls:SettingsSearch.IsPanel="True">
                                 <StackPanel Spacing="6">
                                     <Grid ColumnDefinitions="240,*" ColumnSpacing="8">
+                                        <TextBlock Text="{x:Static res:Strings.ApplicationSettingsWindow_UploadConsentModeLabel}" VerticalAlignment="Center" FontWeight="Normal"/>
+                                        <ComboBox Grid.Column="1" Classes="form-control" IsEnabled="{Binding UploadConsentModeEnabled}" ItemsSource="{Binding UploadConsentModeOptions}" SelectedItem="{Binding SelectedUploadConsentMode, Mode=TwoWay}"/>
+                                    </Grid>
+                                    <TextBlock Classes="hint" Text="{x:Static res:Strings.ApplicationSettingsWindow_UploadConsentDescription}"/>
+                                    <TextBlock Classes="hint" Text="{x:Static res:Strings.ApplicationSettingsWindow_UploadConsentDisabledByDisableUpload}" IsVisible="{Binding !UploadConsentModeEnabled}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Classes="section-card" controls:SettingsSearch.IsPanel="True">
+                                <StackPanel Spacing="6">
+                                    <Grid ColumnDefinitions="240,*" ColumnSpacing="8">
                                         <TextBlock Text="{x:Static res:Strings.ApplicationSettingsWindow_SimultaneousUploadLimitLabel}" VerticalAlignment="Center" FontWeight="Normal"/>
                                         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
                                             <NumericUpDown Classes="form-control" Minimum="0" Maximum="25" Value="{Binding UploadLimit, Mode=TwoWay}"/>

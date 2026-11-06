@@ -1,0 +1,121 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:icons="using:ShareX.Icons"
+        xmlns:controls="using:ShareX.AvaloniaUI.Controls"
+        xmlns:res="using:ShareX.Localization"
+        x:Class="ShareX.UploadConsentWindow"
+        Title="{x:Static res:Strings.UploadConsentWindow_Title}"
+        Width="500"
+        MinWidth="420"
+        SizeToContent="Height"
+        CanResize="False"
+        CanMaximize="False"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Background="{DynamicResource ShareX.Brush.Background.Main}"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+        <Style Selector="Border.message-group">
+            <Setter Property="Background" Value="{DynamicResource ShareX.Brush.Background.Panel}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShareX.Brush.Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14"/>
+        </Style>
+        <Style Selector="Button.compact">
+            <Setter Property="MinWidth" Value="96"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="Padding" Value="14,5"/>
+        </Style>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="{DynamicResource ShareX.Brush.Accent}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ShareX.Brush.Accent.Foreground}"/>
+        </Style>
+        <Style Selector="TextBlock.detail-label">
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="{DynamicResource ShareX.Brush.Text.Secondary}"/>
+        </Style>
+        <Style Selector="TextBlock.detail-value">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </Window.Styles>
+
+    <ThemeVariantScope>
+        <Grid RowDefinitions="Auto,Auto"
+              RowSpacing="12"
+              Margin="18"
+              Background="{DynamicResource ShareX.Brush.Background.Main}">
+            <Border Classes="message-group">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                    <controls:IconPresenter Icon="{x:Static icons:AppIcons.Upload}"
+                                            FontSize="32"
+                                            Foreground="{DynamicResource ShareX.Brush.Accent.Start}"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"/>
+
+                    <StackPanel Grid.Column="1" Spacing="12">
+                        <TextBlock Text="{x:Static res:Strings.UploadConsentWindow_Heading}"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap"/>
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="4">
+                            <TextBlock Classes="detail-label" Text="{x:Static res:Strings.UploadConsentWindow_File}"/>
+                            <TextBlock x:Name="FileNameText" Grid.Column="1" Classes="detail-value"/>
+
+                            <TextBlock Grid.Row="1" Classes="detail-label" Text="{x:Static res:Strings.UploadConsentWindow_Destination}"/>
+                            <TextBlock x:Name="DestinationText" Grid.Row="1" Grid.Column="1" Classes="detail-value"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                            <controls:IconPresenter Icon="{x:Static icons:AppIcons.Warning}"
+                                                    FontSize="16"
+                                                    Foreground="{DynamicResource ShareX.Brush.Text.Secondary}"
+                                                    VerticalAlignment="Top"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{x:Static res:Strings.UploadConsentWindow_Warning}"
+                                       FontWeight="Normal"
+                                       Foreground="{DynamicResource ShareX.Brush.Text.Secondary}"
+                                       TextWrapping="Wrap"/>
+                        </Grid>
+
+                        <StackPanel Spacing="4">
+                            <CheckBox x:Name="RememberChoiceCheckBox"
+                                      FontWeight="Normal"
+                                      IsCheckedChanged="OnRememberChoiceChanged"
+                                      Content="{x:Static res:Strings.UploadConsentWindow_DontAskAgain}"/>
+                            <TextBlock x:Name="RememberHintText"
+                                       Margin="24,0,0,0"
+                                       FontSize="12"
+                                       FontWeight="Normal"
+                                       Opacity="0.85"
+                                       Foreground="{DynamicResource ShareX.Brush.Text.Secondary}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="7">
+                <Button Classes="compact"
+                        Content="{x:Static res:Strings.UploadConsentWindow_NeverUpload}"
+                        Click="OnNeverUploadClick"/>
+                <Button Grid.Column="2"
+                        Classes="compact primary"
+                        Content="{x:Static res:Strings.UploadConsentWindow_Upload}"
+                        Click="OnUploadClick"/>
+                <!-- Cancel is both the cancel and the default button so that Escape, Enter and
+                     closing the window all decline the upload rather than authorize it. -->
+                <Button x:Name="CancelButton"
+                        Grid.Column="3"
+                        Classes="compact"
+                        Content="{x:Static res:Strings.UploadConsentWindow_Cancel}"
+                        IsCancel="True"
+                        IsDefault="True"
+                        Click="OnCancelClick"/>
+            </Grid>
+        </Grid>
+    </ThemeVariantScope>
+</Window>

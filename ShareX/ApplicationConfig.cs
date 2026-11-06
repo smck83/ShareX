@@ -72,6 +72,15 @@ namespace ShareX
 
         public bool AutoCheckUpdate = true;
         public UpdateChannel UpdateChannel = UpdateChannel.Release;
+
+        /// <summary>
+        /// Whether to confirm before uploading a file to an external service. New installations
+        /// default to asking; <see cref="SettingManager"/> migrates an installation that predates
+        /// this setting so that it keeps uploading as it did before.
+        /// Both <see cref="DisableUpload"/> and the administrator DisableUpload policy take
+        /// precedence over this preference.
+        /// </summary>
+        public UploadConsentMode UploadConsentMode = UploadConsentMode.AskEveryTime;
         // TEMP: For backward compatibility
         public bool CheckPreReleaseUpdates = false;
 

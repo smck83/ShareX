@@ -724,6 +724,24 @@
   <data name="ApplicationSettingsWindow_Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="ApplicationSettingsWindow_UploadConsentAlwaysAllow" xml:space="preserve">
+    <value>Allow uploads without confirmation</value>
+  </data>
+  <data name="ApplicationSettingsWindow_UploadConsentAskEveryTime" xml:space="preserve">
+    <value>Always ask before uploading (recommended)</value>
+  </data>
+  <data name="ApplicationSettingsWindow_UploadConsentDescription" xml:space="preserve">
+    <value>Uploading sends the file to a third-party service. Anyone with the resulting link may be able to access it.</value>
+  </data>
+  <data name="ApplicationSettingsWindow_UploadConsentDisabledByDisableUpload" xml:space="preserve">
+    <value>Uploads are currently disabled by the "Disable uploads" setting, which overrides this preference.</value>
+  </data>
+  <data name="ApplicationSettingsWindow_UploadConsentModeLabel" xml:space="preserve">
+    <value>Confirm before uploading files</value>
+  </data>
+  <data name="ApplicationSettingsWindow_UploadConsentNeverAllow" xml:space="preserve">
+    <value>Never allow uploads</value>
+  </data>
   <data name="ApplicationSettingsWindow_UploadResult" xml:space="preserve">
     <value>Upload result</value>
   </data>
@@ -3085,6 +3103,45 @@ Do you want to abort the active screen recording?</value>
   </data>
   <data name="UnableToFindAWindowWithSpecifiedWindowTitle" xml:space="preserve">
     <value>Unable to find a window with specified window title.</value>
+  </data>
+  <data name="UploadConsentWindow_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UploadConsentWindow_Destination" xml:space="preserve">
+    <value>Destination:</value>
+  </data>
+  <data name="UploadConsentWindow_DontAskAgain" xml:space="preserve">
+    <value>Don't ask again</value>
+  </data>
+  <data name="UploadConsentWindow_DontAskAgainHint" xml:space="preserve">
+    <value>Uploading will remember "Allow uploads without confirmation". Cancelling will remember "Never allow uploads". Either can be changed later in Application settings, under Upload.</value>
+  </data>
+  <data name="UploadConsentWindow_File" xml:space="preserve">
+    <value>File:</value>
+  </data>
+  <data name="UploadConsentWindow_Heading" xml:space="preserve">
+    <value>You are about to upload a file to an external service.</value>
+  </data>
+  <data name="UploadConsentWindow_NeverUpload" xml:space="preserve">
+    <value>Never upload</value>
+  </data>
+  <data name="UploadConsentWindow_Title" xml:space="preserve">
+    <value>ShareX - Confirm upload</value>
+  </data>
+  <data name="UploadConsentWindow_UnknownDestination" xml:space="preserve">
+    <value>Unknown destination</value>
+  </data>
+  <data name="UploadConsentWindow_UnknownFile" xml:space="preserve">
+    <value>Unknown file</value>
+  </data>
+  <data name="UploadConsentWindow_Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UploadConsentWindow_Warning" xml:space="preserve">
+    <value>Anyone with the resulting link may be able to access this file.</value>
+  </data>
+  <data name="UploadConsent_UploadsAreNotAllowed" xml:space="preserve">
+    <value>Upload cancelled because uploads are set to never be allowed.</value>
   </data>
   <data name="UploadInfoManager_ShowErrors_Upload_errors" xml:space="preserve">
     <value>Upload errors</value>

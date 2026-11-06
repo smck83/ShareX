@@ -314,7 +314,7 @@ namespace ShareX
 
                 if (!StopRequested)
                 {
-                    if (Info.IsUploadJob && TaskHelpers.IsUploadAllowed())
+                    if (Info.IsUploadJob && TaskHelpers.IsUploadAuthorized(Info))
                     {
                         DoUploadJob();
                     }

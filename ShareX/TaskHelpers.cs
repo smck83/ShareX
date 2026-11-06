@@ -2797,23 +2797,95 @@ namespace ShareX
             MainWindowIntegration.ShowTrayMenu();
         }
 
-        public static bool IsUploadAllowed()
+        /// <summary>
+        /// Serializes upload authorization so that concurrent tasks cannot each begin uploading
+        /// while a decision is still pending, and so that a remembered decision is applied to the
+        /// tasks that are still waiting.
+        /// </summary>
+        /// <remarks>
+        /// Must only be entered from a task worker thread. <see cref="WorkerTask"/> always runs on
+        /// its own background thread, so this lock is never held by, or waited on from, the UI
+        /// thread while a dialog is pending.
+        /// </remarks>
+        private static readonly object uploadConsentLock = new object();
+
+        /// <summary>
+        /// The single authorization gate for every upload, replacing the former
+        /// IsUploadAllowed(). Returns true only when the upload is permitted by the administrator
+        /// policy and the application-wide switch, and the user's consent preference either allows
+        /// it or the user has just approved it. Anything else, including an unavailable UI or a
+        /// failed dialog, returns false.
+        /// </summary>
+        public static bool IsUploadAuthorized(TaskInfo info)
         {
-            if (SystemOptions.DisableUpload)
+            lock (uploadConsentLock)
             {
-                MessageBox.Show(Strings.YourSystemAdminDisabledTheUploadFeature, "ShareX", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ApplicationConfig settings = ApplicationState.Settings;
 
-                return false;
+                UploadAuthorization authorization = UploadConsentPolicy.Evaluate(SystemOptions.DisableUpload,
+                    settings.DisableUpload, settings.UploadConsentMode);
+
+                if (authorization != UploadAuthorization.ConsentRequired)
+                {
+                    return HandleUploadAuthorization(authorization);
+                }
+
+                UploadConsentResult consent = UploadConsentWindowIntegration.Show(info?.FileName, info?.UploaderHost);
+
+                UploadConsentPreference current = new UploadConsentPreference(settings.UploadConsentMode, settings.DisableUpload);
+                UploadConsentPreference updated = UploadConsentPolicy.ApplyChoice(consent.Choice, consent.RememberChoice, current);
+
+                if (updated.Mode != current.Mode || updated.DisableUpload != current.DisableUpload)
+                {
+                    settings.UploadConsentMode = updated.Mode;
+                    settings.DisableUpload = updated.DisableUpload;
+                    SettingManager.SaveApplicationConfigAsync();
+                }
+
+                if (!UploadConsentPolicy.IsApproved(consent.Choice))
+                {
+                    DebugHelper.WriteLine("Upload cancelled: the user did not authorize the upload.");
+
+                    return false;
+                }
+
+                // Re-check the restrictions against the settings as they now stand, so that a
+                // decision made while this dialog was open cannot be overridden by it.
+                return UploadConsentPolicy.EvaluateRestrictions(SystemOptions.DisableUpload, settings.DisableUpload) ==
+                    UploadAuthorization.Allowed;
+            }
+        }
+
+        /// <summary>
+        /// Reports a blocking authorization result to the user. Any result other than
+        /// <see cref="UploadAuthorization.Allowed"/> returns false, so an unhandled or
+        /// unrecognized result blocks the upload.
+        /// </summary>
+        private static bool HandleUploadAuthorization(UploadAuthorization authorization)
+        {
+            if (authorization != UploadAuthorization.Allowed)
+            {
+                // The reason only, so that a blocked upload is diagnosable without
+                // recording the file path or its contents.
+                DebugHelper.WriteLine($"Upload blocked: {authorization}.");
             }
 
-            if (ApplicationState.Settings.DisableUpload)
+            switch (authorization)
             {
-                MessageBox.Show(Strings.ThisFeatureWillNotWorkWhenDisableUploadOptionIsEnabled, "ShareX", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                return false;
+                case UploadAuthorization.Allowed:
+                    return true;
+                case UploadAuthorization.BlockedBySystemPolicy:
+                    MessageBox.Show(Strings.YourSystemAdminDisabledTheUploadFeature, "ShareX", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                case UploadAuthorization.BlockedByDisableUpload:
+                    MessageBox.Show(Strings.ThisFeatureWillNotWorkWhenDisableUploadOptionIsEnabled, "ShareX", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                case UploadAuthorization.BlockedByConsentMode:
+                    ShowNotificationTip(Strings.UploadConsent_UploadsAreNotAllowed, "ShareX", 5000);
+                    return false;
+                default:
+                    return false;
             }
-
-            return true;
         }
     }
 }

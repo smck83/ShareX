@@ -58,3 +58,9 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore --configuration "${{ matrix.configuration }}" -p:Platform="${{ matrix.platform }}" --self-contained true /m "${{ env.SOLUTION_FILE_PATH }}"
+
+      # Only on the x64 Release leg: the runner cannot execute ARM64 test binaries, and the
+      # tests are configuration independent, so running them once is enough.
+      - name: Test
+        if: matrix.platform == 'x64' && matrix.configuration == 'Release'
+        run: dotnet test --no-restore --configuration "${{ matrix.configuration }}" -p:Platform="${{ matrix.platform }}" -p:SelfContained=true "ShareX.Tests\ShareX.Tests.csproj"

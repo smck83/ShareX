@@ -267,6 +267,16 @@ namespace ShareX
                     Settings.UpdateChannel = UpdateChannel.PreRelease;
                 }
             }
+
+            // Upload confirmation is only the default for new installations. An installation that
+            // was already uploading keeps doing so without prompting, so that upgrading cannot
+            // start interrupting established automation such as hotkeys and watch folders.
+            // Note: this must name the last released version, because IsUpgradeFrom only fires
+            // for a configuration written by a strictly older version than the one running.
+            if (Settings.IsUpgradeFrom("22.2.0"))
+            {
+                Settings.UploadConsentMode = UploadConsentPolicy.GetMigratedMode(Settings.DisableUpload);
+            }
         }
 
         public static void HistoryConnect()

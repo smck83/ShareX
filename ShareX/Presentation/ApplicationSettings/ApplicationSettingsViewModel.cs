@@ -85,6 +85,13 @@ public sealed class ApplicationSettingsViewModel : INotifyPropertyChanged, IDisp
     public IReadOnlyList<EnumOption<ThumbnailTitleLocation>> ThumbnailTitleLocationOptions { get; } = CreateEnumOptions<ThumbnailTitleLocation>();
     public IReadOnlyList<EnumOption<ThumbnailViewClickAction>> ThumbnailClickActionOptions { get; } = CreateEnumOptions<ThumbnailViewClickAction>();
     public IReadOnlyList<EnumOption<ProxyMethod>> ProxyMethodOptions { get; } = CreateEnumOptions<ProxyMethod>();
+
+    public IReadOnlyList<EnumOption<UploadConsentMode>> UploadConsentModeOptions { get; } =
+    [
+        new(UploadConsentMode.AskEveryTime, Strings.ApplicationSettingsWindow_UploadConsentAskEveryTime),
+        new(UploadConsentMode.AlwaysAllow, Strings.ApplicationSettingsWindow_UploadConsentAlwaysAllow),
+        new(UploadConsentMode.NeverAllow, Strings.ApplicationSettingsWindow_UploadConsentNeverAllow)
+    ];
     public IReadOnlyList<EnumOption<ImageContentAlignment>> DropAlignmentOptions { get; } =
     [
         new(ImageContentAlignment.TopLeft, Strings.ApplicationSettingsWindow_TopLeft),
@@ -560,6 +567,18 @@ public sealed class ApplicationSettingsViewModel : INotifyPropertyChanged, IDisp
 
     public decimal MaxUploadFailRetry { get => Settings.MaxUploadFailRetry; set => SetSetting(Settings.MaxUploadFailRetry, decimal.ToInt32(value), x => Settings.MaxUploadFailRetry = x); }
 
+    public EnumOption<UploadConsentMode>? SelectedUploadConsentMode
+    {
+        get => Find(UploadConsentModeOptions, Settings.UploadConsentMode);
+        set { if (value != null) SetSetting(Settings.UploadConsentMode, value.Value, x => Settings.UploadConsentMode = x); }
+    }
+
+    /// <summary>
+    /// "Disable uploads" overrides the consent preference, so the preference is shown as
+    /// inactive rather than silently having no effect.
+    /// </summary>
+    public bool UploadConsentModeEnabled => !DisableUpload;
+
     public bool HistorySaveTasks { get => Settings.HistorySaveTasks; set => SetSetting(Settings.HistorySaveTasks, value, x => Settings.HistorySaveTasks = x); }
     public bool HistoryCheckURL { get => Settings.HistoryCheckURL; set => SetSetting(Settings.HistoryCheckURL, value, x => Settings.HistoryCheckURL = x); }
     public bool RecentTasksSave { get => Settings.RecentTasksSave; set => SetSetting(Settings.RecentTasksSave, value, x => Settings.RecentTasksSave = x); }
@@ -645,7 +664,17 @@ public sealed class ApplicationSettingsViewModel : INotifyPropertyChanged, IDisp
     public bool RotateImageByExifOrientationData { get => Settings.RotateImageByExifOrientationData; set => SetSetting(Settings.RotateImageByExifOrientationData, value, x => Settings.RotateImageByExifOrientationData = x); }
     public bool PNGStripColorSpaceInformation { get => Settings.PNGStripColorSpaceInformation; set => SetSetting(Settings.PNGStripColorSpaceInformation, value, x => Settings.PNGStripColorSpaceInformation = x); }
 
-    public bool DisableUpload { get => Settings.DisableUpload; set => SetSetting(Settings.DisableUpload, value, x => Settings.DisableUpload = x); }
+    public bool DisableUpload
+    {
+        get => Settings.DisableUpload;
+        set
+        {
+            if (SetSetting(Settings.DisableUpload, value, x => Settings.DisableUpload = x))
+            {
+                OnPropertyChanged(nameof(UploadConsentModeEnabled));
+            }
+        }
+    }
     public bool URLEncodeIgnoreEmoji { get => Settings.URLEncodeIgnoreEmoji; set => SetSetting(Settings.URLEncodeIgnoreEmoji, value, x => Settings.URLEncodeIgnoreEmoji = x); }
     public bool ShowMultiUploadWarning { get => Settings.ShowMultiUploadWarning; set => SetSetting(Settings.ShowMultiUploadWarning, value, x => Settings.ShowMultiUploadWarning = x); }
     public decimal ShowLargeFileSizeWarning { get => Settings.ShowLargeFileSizeWarning; set => SetSetting(Settings.ShowLargeFileSizeWarning, decimal.ToInt32(value), x => Settings.ShowLargeFileSizeWarning = x); }

@@ -5649,5 +5649,24 @@ namespace ShareX.Localization {
         public static string MainMenuBuilder_VideoPlayer => ResourceManager.GetString("MainMenuBuilder_VideoPlayer", resourceCulture);
         public static string MainMenuBuilder_Stats => ResourceManager.GetString("MainMenuBuilder_Stats", resourceCulture);
         public static string MainMenuBuilder_NewBadge => ResourceManager.GetString("MainMenuBuilder_NewBadge", resourceCulture);
+        public static string UploadConsentWindow_Title => ResourceManager.GetString("UploadConsentWindow_Title", resourceCulture);
+        public static string UploadConsentWindow_Heading => ResourceManager.GetString("UploadConsentWindow_Heading", resourceCulture);
+        public static string UploadConsentWindow_File => ResourceManager.GetString("UploadConsentWindow_File", resourceCulture);
+        public static string UploadConsentWindow_Destination => ResourceManager.GetString("UploadConsentWindow_Destination", resourceCulture);
+        public static string UploadConsentWindow_Warning => ResourceManager.GetString("UploadConsentWindow_Warning", resourceCulture);
+        public static string UploadConsentWindow_DontAskAgain => ResourceManager.GetString("UploadConsentWindow_DontAskAgain", resourceCulture);
+        public static string UploadConsentWindow_DontAskAgainHint => ResourceManager.GetString("UploadConsentWindow_DontAskAgainHint", resourceCulture);
+        public static string UploadConsentWindow_Upload => ResourceManager.GetString("UploadConsentWindow_Upload", resourceCulture);
+        public static string UploadConsentWindow_Cancel => ResourceManager.GetString("UploadConsentWindow_Cancel", resourceCulture);
+        public static string UploadConsentWindow_NeverUpload => ResourceManager.GetString("UploadConsentWindow_NeverUpload", resourceCulture);
+        public static string UploadConsentWindow_UnknownFile => ResourceManager.GetString("UploadConsentWindow_UnknownFile", resourceCulture);
+        public static string UploadConsentWindow_UnknownDestination => ResourceManager.GetString("UploadConsentWindow_UnknownDestination", resourceCulture);
+        public static string UploadConsent_UploadsAreNotAllowed => ResourceManager.GetString("UploadConsent_UploadsAreNotAllowed", resourceCulture);
+        public static string ApplicationSettingsWindow_UploadConsentModeLabel => ResourceManager.GetString("ApplicationSettingsWindow_UploadConsentModeLabel", resourceCulture);
+        public static string ApplicationSettingsWindow_UploadConsentAskEveryTime => ResourceManager.GetString("ApplicationSettingsWindow_UploadConsentAskEveryTime", resourceCulture);
+        public static string ApplicationSettingsWindow_UploadConsentAlwaysAllow => ResourceManager.GetString("ApplicationSettingsWindow_UploadConsentAlwaysAllow", resourceCulture);
+        public static string ApplicationSettingsWindow_UploadConsentNeverAllow => ResourceManager.GetString("ApplicationSettingsWindow_UploadConsentNeverAllow", resourceCulture);
+        public static string ApplicationSettingsWindow_UploadConsentDescription => ResourceManager.GetString("ApplicationSettingsWindow_UploadConsentDescription", resourceCulture);
+        public static string ApplicationSettingsWindow_UploadConsentDisabledByDisableUpload => ResourceManager.GetString("ApplicationSettingsWindow_UploadConsentDisabledByDisableUpload", resourceCulture);
     }
 }

@@ -289,6 +289,9 @@
   <data name="ApplicationSettingsWindow_AdvancedUpload" xml:space="preserve">
     <value>Nahrávání</value>
   </data>
+  <data name="ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow" xml:space="preserve">
+    <value>Zobrazit okno „Před nahráním“ při každém nahrávání</value>
+  </data>
   <data name="ApplicationSettingsWindow_Application" xml:space="preserve">
     <value>Aplikace</value>
   </data>

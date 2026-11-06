@@ -289,6 +289,9 @@
   <data name="ApplicationSettingsWindow_AdvancedUpload" xml:space="preserve">
     <value>अपलोड करें</value>
   </data>
+  <data name="ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow" xml:space="preserve">
+    <value>हर अपलोड के लिए "अपलोड से पहले" विंडो दिखाएँ</value>
+  </data>
   <data name="ApplicationSettingsWindow_Application" xml:space="preserve">
     <value>अनुप्रयोग</value>
   </data>

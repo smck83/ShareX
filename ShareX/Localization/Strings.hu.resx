@@ -289,6 +289,9 @@
   <data name="ApplicationSettingsWindow_AdvancedUpload" xml:space="preserve">
     <value>Feltöltés</value>
   </data>
+  <data name="ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow" xml:space="preserve">
+    <value>"Feltöltés előtt" ablak megjelenítése minden feltöltésnél</value>
+  </data>
   <data name="ApplicationSettingsWindow_Application" xml:space="preserve">
     <value>Alkalmazás</value>
   </data>

@@ -289,6 +289,9 @@
   <data name="ApplicationSettingsWindow_AdvancedUpload" xml:space="preserve">
     <value>الرفع</value>
   </data>
+  <data name="ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow" xml:space="preserve">
+    <value>عرض نافذة "ما قبل الرفع" لكل عملية رفع</value>
+  </data>
   <data name="ApplicationSettingsWindow_Application" xml:space="preserve">
     <value>التطبيق</value>
   </data>

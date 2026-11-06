@@ -267,6 +267,11 @@ namespace ShareX
                     Settings.UpdateChannel = UpdateChannel.PreRelease;
                 }
             }
+
+            if (Settings.IsUpgradeFrom("22.2.0"))
+            {
+                Settings.AlwaysShowBeforeUploadWindow = false;
+            }
         }
 
         public static void HistoryConnect()

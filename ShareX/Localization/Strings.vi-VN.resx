@@ -289,6 +289,9 @@
   <data name="ApplicationSettingsWindow_AdvancedUpload" xml:space="preserve">
     <value>Tải lên</value>
   </data>
+  <data name="ApplicationSettingsWindow_AlwaysShowBeforeUploadWindow" xml:space="preserve">
+    <value>Hiện cửa sổ "Trước khi tải lên" cho mọi lần tải lên</value>
+  </data>
   <data name="ApplicationSettingsWindow_Application" xml:space="preserve">
     <value>Ứng dụng</value>
   </data>
